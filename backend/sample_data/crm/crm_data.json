@@ -1,0 +1,20 @@
+[
+  {
+    "timestamp": "2026-05-01T16:20:00",
+    "company": "FinCore Bank",
+    "deal_stage": "negotiation",
+    "notes": "Concerned about deployment reliability and platform outages."
+  },
+  {
+    "timestamp": "2026-05-02T13:45:00",
+    "company": "HealthSync",
+    "deal_stage": "renewal-risk",
+    "notes": "Customer frustrated by authentication instability during traffic spikes."
+  },
+  {
+    "timestamp": "2026-05-03T11:10:00",
+    "company": "NovaTech",
+    "deal_stage": "churn-risk",
+    "notes": "Considering competitor due to reliability concerns."
+  }
+]

@@ -1,0 +1,8 @@
+Summarize the following organizational meeting.
+
+Focus on:
+- key technical discussions
+- operational concerns
+- decisions
+- risks
+- action items

@@ -1,0 +1,7 @@
+Answer the question using ONLY the organizational context provided.
+
+Focus on:
+- reasoning
+- operational causes
+- supporting evidence
+- organizational decisions

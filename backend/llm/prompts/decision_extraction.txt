@@ -1,0 +1,10 @@
+Extract:
+
+- decisions
+- reasoning
+- tradeoffs
+- risks
+- stakeholders
+- action items
+
+Return structured JSON.
