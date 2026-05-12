@@ -1,0 +1,20 @@
+[
+  {
+    "user": "alex",
+    "channel": "engineering",
+    "text": "Deployment failures increased again after the Kubernetes upgrade.",
+    "timestamp": "2026-05-01"
+  },
+  {
+    "user": "sarah",
+    "channel": "engineering",
+    "text": "We should evaluate AWS ECS to reduce operational overhead.",
+    "timestamp": "2026-05-02"
+  },
+  {
+    "user": "mike",
+    "channel": "support",
+    "text": "Customers are reporting slow dashboard response times.",
+    "timestamp": "2026-05-03"
+  }
+]

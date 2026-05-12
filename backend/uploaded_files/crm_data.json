@@ -1,0 +1,14 @@
+[
+  {
+    "customer": "Acme Corp",
+    "deal_stage": "Negotiation",
+    "issue": "Missing SSO support",
+    "priority": "high"
+  },
+  {
+    "customer": "Nova Inc",
+    "deal_stage": "Lost",
+    "issue": "Dashboard performance issues",
+    "priority": "medium"
+  }
+]

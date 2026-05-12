@@ -1,0 +1,14 @@
+[
+  {
+    "ticket_id": "SUP-101",
+    "title": "Deployment outage",
+    "description": "Production deployment failed during Kubernetes node restart.",
+    "priority": "high"
+  },
+  {
+    "ticket_id": "SUP-102",
+    "title": "Dashboard latency",
+    "description": "Users experiencing 15 second dashboard load times.",
+    "priority": "medium"
+  }
+]

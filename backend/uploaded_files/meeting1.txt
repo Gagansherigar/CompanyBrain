@@ -1,0 +1,12 @@
+Engineering Leadership Meeting
+
+Deployment outages increased 18% this quarter.
+
+The platform team discussed migrating from Kubernetes
+to AWS ECS to reduce operational complexity.
+
+Kubernetes maintenance overhead is slowing deployment speed.
+
+Action Items:
+- Alex to evaluate ECS costs
+- Sarah to prepare migration timeline
