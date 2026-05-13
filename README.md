@@ -1,4 +1,10 @@
+
+
 # Organizational Intelligence System
+https://github.com/user-attachments/assets/3acded88-b844-43dc-9d1e-16716c8673ee
+
+
+
 
 An AI-powered organizational memory and reasoning platform that ingests:
 
