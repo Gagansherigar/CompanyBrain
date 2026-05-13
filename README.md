@@ -17,7 +17,7 @@ and enables:
 ## Tech Stack
 
 - FastAPI
-- Gemini
+- Groq
 - Sentence Transformers
 - Qdrant
 - Docker
