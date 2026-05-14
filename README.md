@@ -4,7 +4,7 @@
 https://github.com/user-attachments/assets/3acded88-b844-43dc-9d1e-16716c8673ee
 
 
-
+https://company-brain-kappa.vercel.app/
 
 An AI-powered organizational memory and reasoning platform that ingests:
 
