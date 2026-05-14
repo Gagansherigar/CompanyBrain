@@ -20,13 +20,12 @@ def ingest_support_tickets(
     combined_text = ""
 
     for ticket in tickets:
-
         combined_text += (
             f"""
-            Ticket ID: {ticket['ticket_id']}
-            Title: {ticket['title']}
-            Description: {ticket['description']}
-            Priority: {ticket['priority']}
+            Ticket ID: {ticket.get('ticket_id', '')}
+            Title: {ticket.get('title', '')}
+            Description: {ticket.get('description', '')}
+            Priority: {ticket.get('priority', '')}
             """
         )
 

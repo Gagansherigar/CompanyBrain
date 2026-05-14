@@ -1,20 +1,38 @@
 [
   {
+    "timestamp": "2026-05-01T09:15:00",
     "user": "alex",
     "channel": "engineering",
-    "text": "Deployment failures increased again after the Kubernetes upgrade.",
-    "timestamp": "2026-05-01"
+    "message": "Deployment rollback happened again after the Kubernetes upgrade. ECS migration discussion is becoming urgent."
   },
   {
+    "timestamp": "2026-05-01T10:45:00",
     "user": "sarah",
-    "channel": "engineering",
-    "text": "We should evaluate AWS ECS to reduce operational overhead.",
-    "timestamp": "2026-05-02"
+    "channel": "platform",
+    "message": "Latency spikes increased 23% this week during deployment windows."
   },
   {
+    "timestamp": "2026-05-01T11:20:00",
     "user": "mike",
-    "channel": "support",
-    "text": "Customers are reporting slow dashboard response times.",
-    "timestamp": "2026-05-03"
+    "channel": "support-escalations",
+    "message": "Enterprise customers are reporting dashboard outages during peak traffic."
+  },
+  {
+    "timestamp": "2026-05-02T09:00:00",
+    "user": "jenny",
+    "channel": "engineering",
+    "message": "Kubernetes maintenance overhead is slowing down deployment velocity."
+  },
+  {
+    "timestamp": "2026-05-02T14:30:00",
+    "user": "alex",
+    "channel": "incident-response",
+    "message": "Critical incident yesterday caused authentication failures for multiple enterprise clients."
+  },
+  {
+    "timestamp": "2026-05-03T08:40:00",
+    "user": "david",
+    "channel": "platform",
+    "message": "The ECS proof of concept reduced deployment recovery time significantly."
   }
 ]

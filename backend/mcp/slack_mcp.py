@@ -10,10 +10,14 @@ class SlackMCPTool:
 
     def __init__(self):
 
+        token = os.getenv(
+            "SLACK_BOT_TOKEN"
+        )
+
+
+
         self.client = WebClient(
-            token=os.getenv(
-                "SLACK_BOT_TOKEN"
-            )
+            token=token
         )
 
     def fetch_messages(

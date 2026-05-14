@@ -5,6 +5,9 @@ from qdrant_client.models import (
     Distance,
     PayloadSchemaType
 )
+from dotenv import load_dotenv
+
+load_dotenv()
 
 import os
 

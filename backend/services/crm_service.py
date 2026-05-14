@@ -20,13 +20,12 @@ def ingest_crm_data(
     combined_text = ""
 
     for record in records:
-
         combined_text += (
             f"""
-            Customer: {record['customer']}
-            Deal Stage: {record['deal_stage']}
-            Issue: {record['issue']}
-            Priority: {record['priority']}
+            Customer: {record.get('customer', '')}
+            Deal Stage: {record.get('deal_stage', '')}
+            Issue: {record.get('issue', '')}
+            Priority: {record.get('priority', '')}
             """
         )
 
