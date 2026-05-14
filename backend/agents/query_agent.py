@@ -97,6 +97,46 @@ class QueryAgent:
             )
         )
 
+        memories = sorted(
+            memories,
+            key=lambda x: x.score,
+            reverse=True
+        )
+
+        if not memories:
+
+            return {
+                "selected_sources": (
+                    selected_sources
+                ),
+
+                "answer": (
+                    "I could not find relevant "
+                    "organizational context "
+                    "to answer this question."
+                ),
+
+                "evidence": []
+            }
+
+        top_score = memories[0].score
+
+        if top_score < 0.45:
+
+            return {
+                "selected_sources": (
+                    selected_sources
+                ),
+
+                "answer": (
+                    "This question appears "
+                    "outside the organizational "
+                    "knowledge base."
+                ),
+
+                "evidence": []
+            }
+
         answer = (
             generate_reasoning_answer(
                 question,
@@ -110,10 +150,12 @@ class QueryAgent:
 
             formatted_memories.append({
                 "score": memory.score,
+
                 "content": memory.payload.get(
                     "content",
                     ""
                 ),
+
                 "metadata": memory.payload.get(
                     "metadata",
                     {}
@@ -124,7 +166,9 @@ class QueryAgent:
             "selected_sources": (
                 selected_sources
             ),
+
             "answer": answer,
+
             "evidence": (
                 formatted_memories
             )
