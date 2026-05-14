@@ -140,7 +140,7 @@ function App() {
           </div>
 
           <h1 className="text-5xl font-bold">
-            Organizational Intelligence
+            CompanyBrain
           </h1>
 
         </div>

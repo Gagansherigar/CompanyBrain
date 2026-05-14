@@ -4,11 +4,19 @@ from qdrant_client.models import (
     Distance
 )
 
-qdrant = QdrantClient(
-    host="localhost",
-    port=6333
-)
+from qdrant_client import QdrantClient
 
+import os
+
+
+qdrant = QdrantClient(
+    url=os.getenv(
+        "QDRANT_URL"
+    ),
+    api_key=os.getenv(
+        "QDRANT_API_KEY"
+    )
+)
 COLLECTION_NAME = (
     "organizational_memory"
 )
