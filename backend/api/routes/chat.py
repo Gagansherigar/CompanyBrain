@@ -20,19 +20,27 @@ def chat(
     request: ChatRequest
 ):
 
-    result = agent.answer_question(
-        request.question
-    )
+    try:
 
-    return {
-        "question": request.question,
-        "selected_sources": result[
-            "selected_sources"
-        ],
-        "answer": result[
-            "answer"
-        ],
-        "evidence": result[
-            "evidence"
-        ]
-    }
+        result = agent.answer_question(
+            request.question
+        )
+
+        return {
+            "question": request.question,
+            "selected_sources": result[
+                "selected_sources"
+            ],
+            "answer": result[
+                "answer"
+            ],
+            "evidence": result[
+                "evidence"
+            ]
+        }
+
+    except Exception as e:
+
+        return {
+            "error": str(e)
+        }
