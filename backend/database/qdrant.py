@@ -1,10 +1,10 @@
 from qdrant_client import QdrantClient
+
 from qdrant_client.models import (
     VectorParams,
-    Distance
+    Distance,
+    PayloadSchemaType
 )
-
-from qdrant_client import QdrantClient
 
 import os
 
@@ -13,10 +13,13 @@ qdrant = QdrantClient(
     url=os.getenv(
         "QDRANT_URL"
     ),
+
     api_key=os.getenv(
         "QDRANT_API_KEY"
     )
 )
+
+
 COLLECTION_NAME = (
     "organizational_memory"
 )
@@ -35,10 +38,35 @@ def create_collection():
 
         qdrant.create_collection(
             collection_name=COLLECTION_NAME,
+
             vectors_config=VectorParams(
                 size=384,
                 distance=Distance.COSINE
             )
+        )
+
+        qdrant.create_payload_index(
+            collection_name=COLLECTION_NAME,
+
+            field_name="metadata.source",
+
+            field_schema=PayloadSchemaType.KEYWORD
+        )
+
+        qdrant.create_payload_index(
+            collection_name=COLLECTION_NAME,
+
+            field_name="metadata.memory_type",
+
+            field_schema=PayloadSchemaType.KEYWORD
+        )
+
+        qdrant.create_payload_index(
+            collection_name=COLLECTION_NAME,
+
+            field_name="metadata.priority",
+
+            field_schema=PayloadSchemaType.KEYWORD
         )
 
 
