@@ -63,12 +63,22 @@ function App() {
       }
     );
 
-    const uniqueEvidence = [];
+   if (res.data.error) {
 
-    const seen = new Set();
+  console.error(res.data.error);
 
-    for (const item of res.data.evidence) {
+  alert(res.data.error);
 
+  return;
+}
+
+const evidence = res.data.evidence || [];
+
+const uniqueEvidence = [];
+
+const seen = new Set();
+
+for (const item of evidence) {
       if (!seen.has(item.content)) {
 
         seen.add(item.content);
