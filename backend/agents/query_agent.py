@@ -18,121 +18,168 @@ class QueryAgent:
             "crm"
         ]
 
-    def decide_sources(
+    def retrieve_memories(
         self,
         question
     ):
 
-        lowered = question.lower()
-
-        selected_sources = []
-
-        if (
-            "customer" in lowered
-            or "enterprise" in lowered
-            or "deal" in lowered
-        ):
-
-            selected_sources.extend([
-                "crm",
-                "support_ticket"
-            ])
-
-        if (
-            "deployment" in lowered
-            or "incident" in lowered
-            or "outage" in lowered
-            or "engineering" in lowered
-        ):
-
-            selected_sources.extend([
-                "slack",
-                "meeting"
-            ])
-
-        if not selected_sources:
-
-            selected_sources = (
-                self.available_sources
-            )
-
-        return list(
-            set(selected_sources)
-        )
-
-    def retrieve_memories(
-        self,
-        question,
-        sources
-    ):
-
         all_memories = []
 
-        for source in sources:
+        for source in self.available_sources:
 
-            results = vector_search(
-                query=question,
-                source_filter=source
+            try:
+
+                results = vector_search(
+                    query=question,
+                    source_filter=source
+                )
+
+                all_memories.extend(
+                    results
+                )
+
+            except Exception:
+
+                continue
+
+        all_memories = sorted(
+            all_memories,
+            key=lambda x: x.score,
+            reverse=True
+        )
+
+        return all_memories[:12]
+
+    def is_relevant(
+        self,
+        memories
+    ):
+
+        if not memories:
+
+            return False
+
+        high_confidence_count = len([
+
+            memory
+
+            for memory in memories
+
+            if memory.score > 0.18
+        ])
+
+        average_score = sum([
+
+            memory.score
+
+            for memory in memories[:5]
+
+        ]) / min(
+            len(memories),
+            5
+        )
+
+        return (
+            high_confidence_count >= 2
+            or average_score > 0.22
+        )
+
+    def build_timeline(
+        self,
+        memories
+    ):
+
+        timeline = []
+
+        sorted_memories = sorted(
+
+            memories,
+
+            key=lambda x: (
+
+                x.payload.get(
+                    "metadata",
+                    {}
+                ).get(
+                    "timestamp",
+                    ""
+                )
+            )
+        )
+
+        for memory in sorted_memories:
+
+            metadata = memory.payload.get(
+                "metadata",
+                {}
             )
 
-            all_memories.extend(results)
+            timeline.append({
 
-        return all_memories
+                "timestamp": metadata.get(
+                    "timestamp",
+                    ""
+                ),
+
+                "source": metadata.get(
+                    "source",
+                    ""
+                ),
+
+                "content": memory.payload.get(
+                    "content",
+                    ""
+                )
+            })
+
+        return timeline
 
     def answer_question(
         self,
         question
     ):
 
-        selected_sources = (
-            self.decide_sources(
-                question
-            )
-        )
-
         memories = (
             self.retrieve_memories(
-                question,
-                selected_sources
+                question
             )
-        )
-
-        memories = sorted(
-            memories,
-            key=lambda x: x.score,
-            reverse=True
         )
 
         if not memories:
 
             return {
-                "selected_sources": (
-                    selected_sources
-                ),
+
+                "selected_sources": [],
 
                 "answer": (
                     "I could not find relevant "
-                    "organizational context "
-                    "to answer this question."
+                    "organizational context."
                 ),
+
+                "timeline": [],
 
                 "evidence": []
             }
 
-        top_score = memories[0].score
+        is_relevant = (
+            self.is_relevant(
+                memories
+            )
+        )
 
-        if top_score < 0.45:
+        if not is_relevant:
 
             return {
-                "selected_sources": (
-                    selected_sources
-                ),
+
+                "selected_sources": [],
 
                 "answer": (
                     "This question appears "
                     "outside the organizational "
                     "knowledge base."
                 ),
+
+                "timeline": [],
 
                 "evidence": []
             }
@@ -144,30 +191,58 @@ class QueryAgent:
             )
         )
 
+        timeline = (
+            self.build_timeline(
+                memories
+            )
+        )
+
         formatted_memories = []
+
+        selected_sources = set()
 
         for memory in memories:
 
+            metadata = memory.payload.get(
+                "metadata",
+                {}
+            )
+
+            source = metadata.get(
+                "source",
+                ""
+            )
+
+            if source:
+
+                selected_sources.add(
+                    source
+                )
+
             formatted_memories.append({
-                "score": memory.score,
+
+                "score": round(
+                    memory.score,
+                    4
+                ),
 
                 "content": memory.payload.get(
                     "content",
                     ""
                 ),
 
-                "metadata": memory.payload.get(
-                    "metadata",
-                    {}
-                )
+                "metadata": metadata
             })
 
         return {
-            "selected_sources": (
+
+            "selected_sources": list(
                 selected_sources
             ),
 
             "answer": answer,
+
+            "timeline": timeline,
 
             "evidence": (
                 formatted_memories
